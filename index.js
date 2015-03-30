@@ -11,7 +11,7 @@ app.get('/dbtest', function(req,res) {
 
 
 app.use(function(req, res) {
-	res.send('woooo')
+	res.send('woooot')
 })
 
 app.listen(80)
