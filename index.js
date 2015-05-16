@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-var models = require('picharts-data')
+var models = require('../picharts-data')
 
 
 app.get('/dbtest', function(req,res) {
@@ -14,4 +14,4 @@ app.use(function(req, res) {
 	res.send('woooot')
 })
 
-app.listen(80)
+app.listen(process.env.NODE_ENV || 8080)
