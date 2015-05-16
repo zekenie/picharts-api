@@ -1,3 +1,4 @@
 module.exports = {
-  secret: 'foobar33'
+  jwtSecret: 'foobar33',
+  cookieSecret: 'foobar44'
 }

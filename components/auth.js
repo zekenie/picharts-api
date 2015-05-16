@@ -5,7 +5,7 @@ var config = require('../config')
 
 module.exports = {
   signJwt: function(u) {
-    return jwt.sign({ id: u.id }, config.secret, { expiresInMinutes: 60*24 })
+    return jwt.sign({ id: u.id }, config.jwtSecret, { expiresInMinutes: 60*24 })
   },
   isAuthenticated: [
     function(req, res, next) {
@@ -14,7 +14,7 @@ module.exports = {
     },
     expressJwt,
     function(req, res, next) {
-      models.User.find(req.user.id)
+      models.User.find({ where: {id: req.user.id}, include: [models.Notification] })
         .then(function(user) {
           if(!user) {
             var err = new Error('failed to deserialize user from id')
@@ -22,9 +22,14 @@ module.exports = {
             throw err
           }
           req.user = user
+          res.locals.user = user
           next()
         })
         .catch(next)
+    },
+    function(req, res, next) {
+      require('./flash').addFlashMiddleware(req, res, next)
+      next()
     }
   ],
   can: function(verb, subject) {

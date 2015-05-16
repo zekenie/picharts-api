@@ -2,17 +2,41 @@ var express = require('express')
 var router = express.Router()
 var models = require('../../picharts-data')
 module.exports = router
-var jwt = require('jsonwebtoken')
 var config = require('../config')
-var createJwt = function(u) {
-  return jwt.sign({_id: u._id}, config.secret, { expiresInMinutes: 60*24 })
-}
+
+var auth = require('../components/auth')
+
 
 router.post('/', function(req, res, next) {
   models.User
     .create(req.body)
     .then(function(user) {
-      res.sendStatus(200)
+      res.cookie('jwt', auth.signJwt(user))
+      res.redirect('/')
     })
     .catch(next)
+})
+
+router.get('/login', function(req, res, next) {
+  res.render('login')
+})
+
+router.post('/login', function(req, res, next) {
+  models.User
+    .findAll({ where: { req.body.email } })
+    .then(function(user) {
+      if(!user) {
+        return res.flashAndRedirect('/users/login', 'Incorrect email or password', 'warning')
+      }
+      res.cookie('jwt', auth.signJwt(user))
+      res.redirect('/')
+    })
+    .catch(next)
+})
+
+router.use(auth.isAuthenticated)
+
+router.get('/logout', function(req, res, next) {
+  res.clearCookies('jwt')
+  res.redirect('/users/login')
 })
