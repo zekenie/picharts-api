@@ -18,12 +18,13 @@ router.post('/', function(req, res, next) {
 })
 
 router.get('/login', function(req, res, next) {
-  res.render('login')
+  console.log('getting to route')
+  res.render('users/login')
 })
 
 router.post('/login', function(req, res, next) {
   models.User
-    .findAll({ where: { req.body.email } })
+    .findAll({ where: { email: req.body.email } })
     .then(function(user) {
       if(!user) {
         return res.flashAndRedirect('/users/login', 'Incorrect email or password', 'warning')

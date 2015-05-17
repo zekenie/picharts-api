@@ -4,17 +4,49 @@ module.exports = app
 
 var config = require('./config')
 var models = require('../picharts-data')
+var swig = require('swig')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
+var sass = require('node-sass-middleware')
+
+swig.setDefaults({ cache: false })
+app.engine('html', swig.renderFile)
+app.set('views', __dirname + '/views')
+app.set('view engine', 'html')
+app.set('view cache', false);
+swig.setDefaults({ cache: false });
+
+
+
 app.use(logger('dev'))
 
+app.use(sass({
+  src: __dirname + '/assets',
+  dest: __dirname + '/public',
+  debug: true
+}))
+
+app.use(express.static(__dirname + '/public'))
 app.use(cookieParser(config.cookieSecret))
 
-app.get('/dbtest', function(req,res) {
-	models.User.findAll().then(function(users) {
-		res.json(users)
-	})
+app.get('/', function(req,res,next) {
+  res.render('index', {
+    isLoggedIn: true
+  })
 })
 
+app.use('/users', require('./api/users'))
 
-app.listen(process.env.NODE_ENV || 8080)
+app.use(function(req, res, next) {
+  var err = new Error('not found')
+  err.status = 404
+  next(err)
+})
+
+app.use(function(err, req, res, next) {
+  res.sendStatus(err.status || 500).send(err)
+})
+
+app.listen(config.port, function() {
+  console.log('app listening on', config.port)
+})

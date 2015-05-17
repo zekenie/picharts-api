@@ -16,6 +16,8 @@
     "jsonwebtoken": "^5.0.1",
     "lodash": "^3.8.0",
     "morgan": "^1.5.3",
-    "picharts-data": "^1.0.1"
+    "node-sass-middleware": "^0.7.0",
+    "picharts-data": "^1.0.1",
+    "swig": "^1.4.2"
   }
 }
