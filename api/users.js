@@ -18,8 +18,11 @@ router.post('/', function(req, res, next) {
 })
 
 router.get('/login', function(req, res, next) {
-  console.log('getting to route')
   res.render('users/login')
+})
+
+router.get('/signup', function(req, res, next) {
+  res.render('users/signup')
 })
 
 router.post('/login', function(req, res, next) {

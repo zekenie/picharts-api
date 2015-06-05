@@ -9,28 +9,36 @@
   <div class="col-md-12">
     <div class="grid simple">
       <div class="grid-body no-border"> <br>
-        <div class="row">
-          <div class="col-md-8 col-sm-8 col-xs-8">
-            <form method="post" action="/users/login">
-              <!-- <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <div class="controls">
-                  <input name="email" type="email" class="form-control">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <div class="controls">
-                  <input name="password" type="password" class="form-control">
-                </div>
-              </div> -->
-
-              <button type="submit" class="btn btn-success btn-cons">Login</button>
-            </form>
-
+        <form method="post" action="/users">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <div class="controls">
+              <input type="text" name="name" class="form-control">
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <div class="controls">
+              <input name="email" type="email" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone</label>
+            <div class="controls">
+              <input name="phone" type="tel" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="controls">
+              <input name="password" type="password" class="form-control">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success btn-cons">Login</button>
+        </form>
+
       </div>
     </div>
   </div>

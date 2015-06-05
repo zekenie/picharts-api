@@ -9,10 +9,11 @@ module.exports = {
   },
   isAuthenticated: [
     function(req, res, next) {
-      if(req.headers.Authorization) return next()
-      req.headers.Authorization = 'Bearer ' + req.cookies.jwt
+      if(req.headers.authorization) return next()
+      req.headers.authorization = 'Bearer ' + req.cookies.jwt
+      next()
     },
-    expressJwt,
+    expressJwt({ secret: config.jwtSecret }),
     function(req, res, next) {
       models.User.find({ where: {id: req.user.id}, include: [models.Notification] })
         .then(function(user) {
