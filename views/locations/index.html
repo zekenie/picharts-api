@@ -1,0 +1,41 @@
+{% extends '../shared/layout.html' %}
+
+{% block content %}
+
+<div class="page-header">
+  <h3>Locations</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="grid simple">
+      <div class="grid-body no-border"><br>
+
+        <a href="/locations/new" class="btn">Add Location</a>
+
+        <table class="table no-more-tables">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Lat</th>
+              <th>Lng</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for location in locations %}
+            <tr>
+              <td><a href="/locations/{{ location.id }}">{{ location.name }}</a></td>
+              <td>{{ location.lat }}</td>
+              <td>{{ location.lng }}</td>
+              <td><a href="/locations/{{ location.id }}/edit">edit</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

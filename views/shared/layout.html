@@ -38,7 +38,7 @@
           {% if user %}
           <div class="pull-left">
             <ul class="nav quick-section">
-              <li class="quicklinks"> <a href="#" class="" >
+              <li class="quicklinks"> <a href="/" class="" >
                 <div class="iconset top-tiles"></div>
                 </a> </li>
               <li class="m-r-10 input-prepend inside search-form no-boarder"> <span class="add-on"> <span class="iconset top-search"></span></span>
@@ -52,10 +52,9 @@
           <div class="pull-right">
             <div class="chat-toggler"> <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom"  data-content='' data-toggle="dropdown" data-original-title="Notifications">
               <div class="user-details">
-                <div class="username"> <span class="badge badge-important">3</span> John <span class="bold">Smith</span> </div>
+                <div class="username"> <span class="badge badge-important">3</span> {{ user.name }}</div>
               </div>
               </a>
-               <div class="profile-pic"> <img src="assets/img/profiles/avatar_small.jpg"  alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg" width="35" height="35" /> </div>
             </div>
            </div>
            {% else %}

@@ -36,11 +36,12 @@ var auth = require('./components/auth')
 
 app.get('/', auth.isAuthenticated, function(req,res,next) {
   res.render('index', {
-    user: {}
   })
 })
 
 app.use('/users', require('./api/users'))
+
+app.use('/locations', require('./api/locations'))
 
 app.use(function(req, res, next) {
   var err = new Error('not found')

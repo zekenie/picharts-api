@@ -1,0 +1,11 @@
+.main-nav {
+  .tiles {
+    padding: 25px;
+    text-align: center;
+    & > i {
+      display: block;
+      padding:5px;
+      font-size: 3em;
+    }
+  }
+}
