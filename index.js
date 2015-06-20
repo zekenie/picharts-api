@@ -9,6 +9,7 @@ var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var sass = require('node-sass-middleware')
 var bodyParser = require('body-parser')
+var settings= require('./settings')
 
 swig.setDefaults({ cache: false })
 app.engine('html', swig.renderFile)
@@ -32,6 +33,12 @@ app.use(sass({
 app.use(express.static(__dirname + '/public'))
 app.use(cookieParser(config.cookieSecret))
 
+app.use(function(req, res, next) {
+  res.locals.settings = settings.getAll()
+  req.settings = settings.getAll()
+  next()
+})
+
 var auth = require('./components/auth')
 
 app.get('/', auth.isAuthenticated, function(req,res,next) {
@@ -51,6 +58,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   console.log(err)
+  console.log(err.stack)
   res.sendStatus(err.status || 500).send(err)
 })
 

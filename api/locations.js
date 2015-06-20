@@ -4,7 +4,7 @@ var models = require('../../picharts-data')
 module.exports = router
 var config = require('../config')
 var auth = require('../components/auth')
-
+var settings = require('../settings')
 router.use(auth.isAuthenticated)
 
 router.get('/new', function(req, res, next) {
@@ -30,8 +30,15 @@ router.get('/:id', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next) {
   res.render('locations/edit', {
     method: 'post',
-    action: '/locations/' + req.location._id
+    action: '/locations/' + req.location.id
   })
+})
+
+router.get('/:id/makeCurrent', function(req, res, next) {
+  settings.set('locationId', Number(req.params.id))
+    .then(function() {
+      res.redirect('/locations')
+    }, next)
 })
 
 router.post('/:id', function(req, res, next) {
@@ -41,6 +48,7 @@ router.post('/:id', function(req, res, next) {
   req.location
     .save()
     .then(function(location) {
+      console.log('location after save', location)
       res.flashAndRedirect('Location updated', '/locations/' + location.id)
     })
     .catch(next)

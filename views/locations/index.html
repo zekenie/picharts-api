@@ -19,6 +19,7 @@
               <th>Name</th>
               <th>Lat</th>
               <th>Lng</th>
+              <th>Current</th>
               <th></th>
             </tr>
           </thead>
@@ -28,6 +29,13 @@
               <td><a href="/locations/{{ location.id }}">{{ location.name }}</a></td>
               <td>{{ location.lat }}</td>
               <td>{{ location.lng }}</td>
+              <td>
+                {% if settings.locationId == location.id %}
+                  Current
+                {% else %}
+                  <a href="/locations/{{ location.id }}/makeCurrent">Make Current</a>
+                {% endif %}
+              </td>
               <td><a href="/locations/{{ location.id }}/edit">edit</a></td>
             </tr>
             {% endfor %}

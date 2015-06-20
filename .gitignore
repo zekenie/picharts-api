@@ -1,4 +1,5 @@
 node_modules
+settings/settings.json
 bower_components
 npm-debug.log
 .DS_Store
