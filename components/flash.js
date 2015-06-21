@@ -1,4 +1,4 @@
-var models = require('../../picharts-data')
+var models = require('picharts-data')
 
 module.exports = {
   addFlashMiddleware: function(req, res, next) {

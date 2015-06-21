@@ -3,7 +3,7 @@ var app = express()
 module.exports = app
 
 var config = require('./config')
-var models = require('../picharts-data')
+var models = require('picharts-data')
 var swig = require('swig')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
@@ -40,14 +40,19 @@ app.use(function(req, res, next) {
 
 var auth = require('./components/auth')
 
-app.get('/', auth.isAuthenticated, function(req,res,next) {
+app.use('/users', require('./api/users'))
+
+app.use(auth.isAuthenticated)
+
+app.get('/', function(req,res,next) {
   res.render('index', {
   })
 })
 
-app.use('/users', require('./api/users'))
 
 app.use('/locations', require('./api/locations'))
+
+app.use('/patients', require('./api/patients'))
 
 app.use(function(req, res, next) {
   var err = new Error('not found')
@@ -58,7 +63,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   console.log(err)
   console.log(err.stack)
-  res.sendStatus(err.status || 500).send(err)
+  res.status(err.status || 500).send(err)
 })
 
 app.listen(config.port, function() {

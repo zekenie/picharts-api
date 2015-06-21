@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken')
 var expressJwt = require('express-jwt')
-var models = require('../../picharts-data')
+var models = require('picharts-data')
 var config = require('../config')
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
         .then(function(user) {
           if(!user) {
             var err = new Error('failed to deserialize user from id')
-            err.status = 500
+            err.status = 401
             throw err
           }
           req.user = user
