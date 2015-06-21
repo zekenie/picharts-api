@@ -26,8 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(sass({
   src: __dirname + '/assets',
-  dest: __dirname + '/public',
-  debug: true
+  dest: __dirname + '/public'
 }))
 
 app.use(express.static(__dirname + '/public'))

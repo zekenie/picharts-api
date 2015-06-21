@@ -24,7 +24,6 @@ module.exports = {
           }
           req.user = user
           res.locals.user = user
-          console.log(res.locals.user.name)
           next()
         })
         .catch(next)

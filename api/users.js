@@ -27,7 +27,7 @@ router.get('/signup', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   models.User
-    .findAll({ where: { email: req.body.email } })
+    .find({ where: { email: req.body.email } })
     .then(function(user) {
       if(!user) {
         return res.flashAndRedirect('/users/login', 'Incorrect email or password', 'warning')
