@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken')
 var expressJwt = require('express-jwt')
-var models = require('picharts-data')
+var models = require('../models')
 var config = require('../config')
 
 module.exports = {

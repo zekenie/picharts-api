@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var models = require('picharts-data')
+var models = require('../models')
 module.exports = router
 var config = require('../config')
 
@@ -24,7 +24,7 @@ router.get('/new', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   req.body.LocationId = req.settings.locationId
-  console.log(req.body)
+  req.body.dob = new Date(req.body.dob)
   models.Patient
     .create(req.body)
     .then(function(patient) {

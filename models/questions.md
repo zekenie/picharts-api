@@ -1,0 +1,6 @@
+- do users have email addresses?
+- are emails/passwords somethign they know about?
+- what happens when they forget their password?
+- how will we make sure the user using a tablet is logged in as themselves?
+- what languages need to be supported?
+	- internationalization

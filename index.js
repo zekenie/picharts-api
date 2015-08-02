@@ -3,7 +3,7 @@ var app = express()
 module.exports = app
 
 var config = require('./config')
-var models = require('picharts-data')
+var models = require('./models')
 var swig = require('swig')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')

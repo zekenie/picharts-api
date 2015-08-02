@@ -1,0 +1,19 @@
+{
+  "name": "picharts-data",
+  "version": "1.0.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node ./seed/index"
+  },
+  "author": {
+    "name": "Zeke Nierenberg",
+    "email": "hampzan09@gmail.com"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.3",
+    "bluebird": "^2.9.25",
+    "mysql": "^2.6.2",
+    "sequelize": "^2.1.3"
+  }
+}

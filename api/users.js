@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var models = require('picharts-data')
+var models = require('../models')
 module.exports = router
 var config = require('../config')
 
